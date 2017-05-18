@@ -48,6 +48,21 @@ namespace LibUSB
 		/*!
 		 * \brief
 		 *
+		 * Returns a single device (that already must be opened) that match the given file descriptor and USBFS device path.
+		 *
+		 * \param fileDescriptor (int): Device unique file descriptor number.
+		 * \param devicePath (std::string): Device unique USBFS device path name.
+		 * \param debugLibUSB (bool): Enable LibUSB debug output on standard error.
+		 * \returns (std::shared_ptr<D>): Shared pointer to LibUSB::Device class object.
+		 * \sa
+		 * \note This method is special for Android where USB devices already must be opened with the Android UsbHostManager in Java.
+		 * \warning Multiple devices can be returned via this method, if attached.
+		 */
+		static std::shared_ptr<Device> GetDevice(int fileDescriptor, std::string devicePath, bool debugLibUSB = false, DeviceFactory_t factory = nullptr);
+
+		/*!
+		 * \brief
+		 *
 		 * Returns a list of devices (that can be opened) that match the given vendor/product id.
 		 *
 		 * \param vendorID (uint16_t): USB-IF vendor id of the desired device.
