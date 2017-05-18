@@ -63,11 +63,11 @@ namespace LibUSB
 		/*!
 		 * \brief
 		 *
-		 * Returns a list of devices (that can be opened) that match the given vendor/product id.
+		 * Returns a list of devices (that can be opened) that match the given vendor/product id and serial number.
 		 *
 		 * \param vendorID (uint16_t): USB-IF vendor id of the desired device.
 		 * \param deviceID (uint16_t): USB-IF product id of the desired device.
-		 * \param serialStr (std::wstring): Device unique serial number
+		 * \param serialStr (std::wstring): Device unique serial number.
 		 * \param debugLibUSB (bool): Enable LibUSB debug output on standard error.
 		 * \returns (std::list<std::shared_ptr<D>>): List of shared pointers to LibUSB::Device class objects.
 		 * \sa

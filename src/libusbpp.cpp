@@ -30,7 +30,7 @@ std::list<std::shared_ptr<LibUSB::Device>> LibUSB::LibUSB::FindDevice( uint16_t 
 	// Ensure libusb is initialized.
 	Initialize(debugLibUSB);
 
-	// Create a list of attached devices
+	// Create a list of attached devices.
 	libusb_device **device_list = nullptr;
 
 	ssize_t NumResults = libusb_get_device_list(Impl_->m_pLibusb_context.get(), &device_list);
