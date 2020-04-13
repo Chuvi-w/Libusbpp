@@ -3,12 +3,13 @@
 #
 
 # Require libusb-1.0
-find_package (LibUSB-1.0 REQUIRED)
-if (LIBUSB1_FOUND)
-    include_directories (SYSTEM ${LIBUSB1_INCLUDE_DIR})
-else (LIBUSB1_FOUND)
+#find_package (LibUSB-1.0 REQUIRED)
+find_package(libusb-1.0 REQUIRED)
+if (LIBUSB_1_FOUND)
+    include_directories (SYSTEM ${LIBUSB_1_INCLUDE_DIR})
+else (LIBUSB_1_FOUND)
     message (FATAL_ERROR "LibUSB-1.0 was not found.")
-endif (LIBUSB1_FOUND)
+endif (LIBUSB_1_FOUND)
 
 # On Windows do not prefix the DLLs with the 'lib' prefix
 if (WIN32)
@@ -74,7 +75,7 @@ target_include_directories (objlibusbpp
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 # Actual shared and static libraries built from the same object files
 add_library (sharedlibusbpp SHARED $<TARGET_OBJECTS:objlibusbpp>)
-target_link_libraries (sharedlibusbpp ${LIBUSB1_LIBRARIES})
+target_link_libraries (sharedlibusbpp ${LIBUSB_1_LIBRARIES})
 set_target_properties (sharedlibusbpp
                        PROPERTIES OUTPUT_NAME "${LIBUSBPP_LIB_NAME}"
                                   PREFIX "${LIB_PREFIX}"

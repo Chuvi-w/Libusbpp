@@ -84,6 +84,7 @@ endif (${srcdir} STREQUAL ${bindir})
 foreach (p
 		CMP0025 # CMake 3.0: Compiler id for Apple Clang is now AppleClang
         CMP0026 # CMake 3.0: Disallow use of the LOCATION target property
+        CMP0042 # CMake 3.0: CMake 2.8.12 and newer has support for using ``@rpath`` - CMP0042
         )
 	if (POLICY ${p})
 		cmake_policy(SET ${p} NEW)
@@ -129,7 +130,7 @@ else (COMPILER_SUPPORTS_CXX17)
     endif (COMPILER_SUPPORTS_CXX11)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${CMAKE_CURRENT_SOURCE_DIR}/cmake")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include backport_std_unique_ptr.hpp")
-endif (COMPILER_SUPPORTS_CXX14)
+endif (COMPILER_SUPPORTS_CXX17)
 
 # Setup CMake to run tests
 include (CTest)
