@@ -30,8 +30,8 @@
   #include <libusb.h>
 #endif
 
-#include <libusbpp/EndpointDefs.hpp>
-#include <libusbpp/Transfer.hpp>
+#include <EndpointDefs.hpp>
+#include <Transfer.hpp>
 
 
 namespace LibUSB

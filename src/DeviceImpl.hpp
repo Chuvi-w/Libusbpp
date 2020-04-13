@@ -31,7 +31,7 @@
   #include <libusb.h>
 #endif
 
-#include <libusbpp/Device.hpp>
+#include <Device.hpp>
 
 
 namespace LibUSB

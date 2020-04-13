@@ -26,7 +26,7 @@
   #include <libusb.h>
 #endif
 
-#include <libusbpp/Exception.hpp>
+#include <Exception.hpp>
 
 
 LibUSB::LibUSBException::LibUSBException( std::string text, int errorCode )
