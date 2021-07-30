@@ -18,7 +18,7 @@
  * along with libusbpp.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libusbpp/Transfer.hpp>
+#include <Transfer.hpp>
 
 #include "TransferImpl.hpp"
 
@@ -233,7 +233,7 @@ void LibUSB::Transfer::AsyncStart()
 
 	std::thread transferThread([=]()
 				{
-					bool Result = false;
+					//bool Result = false;
 
 					try
 					{

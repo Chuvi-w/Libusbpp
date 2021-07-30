@@ -18,9 +18,13 @@
  * along with libusbpp.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libusb.h>
+#ifdef __linux__
+  #include <libusb-1.0/libusb.h>
+#elif _WIN32
+  #include <libusb.h>
+#endif
 
-#include <libusbpp/Interface.hpp>
+#include <Interface.hpp>
 
 #include "InterfaceImpl.hpp"
 
@@ -131,4 +135,3 @@ bool LibUSB::Interface::isClaimed() const
 
 	return m_pInterfaceImpl->isClaimed();
 }
-

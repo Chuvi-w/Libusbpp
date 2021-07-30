@@ -25,9 +25,15 @@
 #include <memory>
 #include <map>
 
-#include <libusb.h>
+#if APPLE
+  #include <libusb.h>
+#elif __linux__
+  #include <libusb-1.0/libusb.h>
+#elif _WIN32
+  #include <libusb.h>
+#endif
 
-#include <libusbpp/Endpoint.hpp>
+#include <Endpoint.hpp>
 
 
 namespace LibUSB
@@ -74,7 +80,7 @@ namespace LibUSB
 
 		/*!
 		 * \brief Selects an alternate interface setting.
-		 * 
+		 *
 		 *
 		 * \param AlternateSetting (uint8_t): the index of the alternate setting to select/use.
 		 * \throws (std::logic_error) if the alternate setting is out-of-range.

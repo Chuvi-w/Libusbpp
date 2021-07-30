@@ -20,9 +20,15 @@
 
 #include <sstream>
 
-#include <libusb.h>
+#if APPLE
+  #include <libusb.h>
+#elif __linux__
+  #include <libusb-1.0/libusb.h>
+#elif _WIN32
+  #include <libusb.h>
+#endif
 
-#include <libusbpp/Exception.hpp>
+#include <Exception.hpp>
 
 
 LibUSB::LibUSBException::LibUSBException( std::string text, int errorCode )
