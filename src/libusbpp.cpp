@@ -24,13 +24,46 @@
 #include "LibusbImpl.hpp"
 
 
+std::shared_ptr<LibUSB::Device> LibUSB::LibUSB::GetDevice( int fileDescriptor, std::string devicePath, bool debugLibUSB /*=false*/, DeviceFactory_t factory /*= nullptr*/ )
+{
+
+	// Ensure libusb is initialized.
+	Initialize(debugLibUSB);
+
+	// Create a dummy handle to the attached device.
+	libusb_device_handle *device_handle = nullptr;
+
+	int Result = libusb_wrap_fd(Impl_->m_pLibusb_context.get(), fileDescriptor, &device_handle);
+	if (Result < 0)
+	{
+		throw std::runtime_error("LibUSB::LibUSB::FindDevice(): libusb_wrap_fd() failed.");
+	}
+
+	// Create a device.
+	std::shared_ptr<Device> pDevice;
+	if(factory != nullptr)
+	{
+
+		pDevice = factory(std::make_shared<DeviceImpl>(libusb_get_device(device_handle), device_handle));
+
+	}
+	else
+	{
+		pDevice.reset(new Device(std::make_shared<DeviceImpl>(libusb_get_device(device_handle), device_handle)));
+	}
+
+	pDevice->Init();
+
+	return pDevice;
+}
+
 std::list<std::shared_ptr<LibUSB::Device>> LibUSB::LibUSB::FindDevice( uint16_t vendorID, uint16_t productID, bool debugLibUSB /*=false*/, DeviceFactory_t factory /*= nullptr*/ )
 {
 
 	// Ensure libusb is initialized.
 	Initialize(debugLibUSB);
 
-	// Create a list of attached devices
+	// Create a list of attached devices.
 	libusb_device **device_list = nullptr;
 
 	ssize_t NumResults = libusb_get_device_list(Impl_->m_pLibusb_context.get(), &device_list);

@@ -43,6 +43,18 @@ LibUSB::DeviceImpl::DeviceImpl( libusb_device* device )
 }
 
 
+LibUSB::DeviceImpl::DeviceImpl( libusb_device* device, libusb_device_handle *handle )
+	: languageId(0)
+{
+
+	// Add a reference to pDevice and save it.
+	m_pDevice.reset(libusb_ref_device(device), DeviceDeleter());
+
+	// Save the pHandle and mock pDevice as already opened.
+	m_pHandle.reset(handle, DeviceHandleDeleter());
+}
+
+
 LibUSB::DeviceImpl::~DeviceImpl()
 {
 

@@ -53,6 +53,7 @@ namespace LibUSB
 	public:
 
 		DeviceImpl(libusb_device* pDevice);
+		DeviceImpl(libusb_device* pDevice, libusb_device_handle *pHandle);
 		~DeviceImpl();
 
 		/// Obtains the device descriptor.
